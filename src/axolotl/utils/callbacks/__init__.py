@@ -714,6 +714,7 @@ def log_prediction_callback_factory(trainer: Trainer, tokenizer, logger: str):
                         prompt_encoding = tokenizer(
                             prompt_texts, padding=True, return_tensors="pt"
                         ).to(self.cfg.device)
+                        prompt_encoding.pop('token_type_ids')
                         predictions = trainer.model.generate(
                             **prompt_encoding, generation_config=generation_config
                         )
